@@ -26,28 +26,32 @@ const BookList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto my-8">
-      <h2 className="text-3xl font-bold mb-4">Books</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="container mx-auto my-8 px-4">
+      <h2 className="text-3xl text-black font-bold mb-6">Books</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {books.length > 0 ? (
           books.map((book, index) => {
             console.log(`Rendering book ${index + 1}:`, book);
             return (
               <div
                 key={book.id || index}
-                className="bg-white p-4 rounded shadow-md border hover:shadow-lg"
+                className="bg-white text-black p-6 rounded-lg shadow-lg border hover:shadow-xl transition duration-300"
               >
-                <h3 className="text-xl font-bold">
+                <h3 className="text-xl font-bold mb-2">
                   {book.title || "No Title"}
                 </h3>
-                <p>Author: {book.author || "Unknown"}</p>
-                <p>Year: {book.year || "N/A"}</p>
-                <p>Category: {book.category_name || "Uncategorized"}</p>
+                <p className="text-gray-700">
+                  Author: {book.author || "Unknown"}
+                </p>
+                <p className="text-gray-700">Year: {book.year || "N/A"}</p>
+                <p className="text-gray-700">
+                  Category: {book.category_name || "Uncategorized"}
+                </p>
               </div>
             );
           })
         ) : (
-          <p>No books available.</p>
+          <p className="text-center col-span-full">No books available.</p>
         )}
       </div>
     </div>
