@@ -1,4 +1,4 @@
-import { useState, setToken } from "react";
+import { useState } from "react";
 
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState("");

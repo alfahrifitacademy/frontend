@@ -13,8 +13,11 @@ const BookList = () => {
           },
         });
         const data = await response.json();
-        setBooks(data);
+        console.log("Full API Response:", data);
+        console.log("Books to Set:", data.data.books);
+        setBooks(data.data.books);
       } catch (error) {
+        console.error("Error fetching books:", error);
         alert("Failed to fetch books!");
       }
     };
@@ -26,17 +29,26 @@ const BookList = () => {
     <div className="container mx-auto my-8">
       <h2 className="text-3xl font-bold mb-4">Books</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {books.map((book) => (
-          <div
-            key={book.id}
-            className="bg-white p-4 rounded shadow-md border hover:shadow-lg"
-          >
-            <h3 className="text-xl font-bold">{book.title}</h3>
-            <p>Author: {book.author}</p>
-            <p>Year: {book.year}</p>
-            <p>Category: {book.category_name}</p>
-          </div>
-        ))}
+        {books.length > 0 ? (
+          books.map((book, index) => {
+            console.log(`Rendering book ${index + 1}:`, book);
+            return (
+              <div
+                key={book.id || index}
+                className="bg-white p-4 rounded shadow-md border hover:shadow-lg"
+              >
+                <h3 className="text-xl font-bold">
+                  {book.title || "No Title"}
+                </h3>
+                <p>Author: {book.author || "Unknown"}</p>
+                <p>Year: {book.year || "N/A"}</p>
+                <p>Category: {book.category_name || "Uncategorized"}</p>
+              </div>
+            );
+          })
+        ) : (
+          <p>No books available.</p>
+        )}
       </div>
     </div>
   );
